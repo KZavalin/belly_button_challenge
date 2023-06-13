@@ -47,6 +47,12 @@ function init() {
             }
         };
     Plotly.newPlot("bar", traceData, layout);
+//Demographics
+    let metadata=data.metadata[personID];
+    for (var j in metadata) {
+        d3.select(".panel-title").append('body').text(j+ ":" + metadata[j]+ " ").classed("demo",true);
+        console.log(j+ ":" + metadata[j]+ " ")
+    }
 });
 };
 
@@ -95,7 +101,13 @@ function updatePlotly() {
             }
         };
     Plotly.react("bar", traceData, layout);
-  
+  //Demographics
+  let metadata=data.metadata[personID];
+  d3.selectAll(".demo").remove()
+      for (var j in metadata) {
+        d3.select(".panel-title").append('body').text(j+ ":" + metadata[j]+ " ").classed("demo",true);
+        console.log(j+ ":" + metadata[j]+ " ")
+        }
 });};
   
 
