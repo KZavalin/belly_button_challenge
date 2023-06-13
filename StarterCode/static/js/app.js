@@ -28,7 +28,7 @@ function init() {
     let top10numbers= persondata.sample_values.slice(0, 10);
     let top10ids = persondata.otu_ids.slice(0, 10).map(id=>`OTU ${id}`);
     let top10labels= persondata.otu_labels.slice(0, 10);
-    let trace1 = {
+       let trace1 = {
         y: top10ids,
         x: top10numbers,
         text: top10labels,
@@ -47,6 +47,23 @@ function init() {
             }
         };
     Plotly.newPlot("bar", traceData, layout);
+//Bubble Chart
+let bubtrace = {
+    x: persondata.otu_ids,
+    y: persondata.sample_values,
+    mode: 'markers',
+    marker: {
+        color: persondata.otu_ids,
+        size: persondata.sample_values},
+    text: persondata.otu_labels
+};
+
+let bub = [bubtrace];
+let layout2 = {
+    title:`Bubble Chart of OTU in Individual ${selectionID}`,
+            xaxis: {title: "OTU ID"}
+        };
+Plotly.newPlot('bubble',bub,layout2);
 //Demographics
     let metadata=data.metadata[personID];
     for (var j in metadata) {
@@ -101,6 +118,24 @@ function updatePlotly() {
             }
         };
     Plotly.react("bar", traceData, layout);
+
+//Bubble Chart
+let bubtrace = {
+    x: persondata.otu_ids,
+    y: persondata.sample_values,
+    mode: 'markers',
+    marker: {
+        color: persondata.otu_ids,
+        size: persondata.sample_values},
+    text: persondata.otu_labels
+};
+let bub = [bubtrace];
+let layout2 = {
+    title:`Bubble Chart of OTU in Individual ${selectionID}`,
+            xaxis: {title: "OTU ID"}
+        };
+Plotly.react('bubble',bub,layout2);
+
   //Demographics
   let metadata=data.metadata[personID];
   d3.selectAll(".demo").remove()
